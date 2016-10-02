@@ -1,2 +1,2 @@
-include ':FtcRobotController'
-include ':TeamCode'
+include ':ftc_app:FtcRobotController'
+include ':ftc_app:TeamCode'

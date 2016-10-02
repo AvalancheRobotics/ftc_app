@@ -1,3 +1,6 @@
+import java.util.regex.Pattern
+
+
 if ( rootProject.buildAndroid ) {
 /**
  * build.common.gradle
@@ -16,7 +19,6 @@ if ( rootProject.buildAndroid ) {
  * updates to the FTC SDK into your code.
  */
 
-import java.util.regex.Pattern
 
 apply plugin: 'com.android.application'
 
@@ -29,7 +31,7 @@ android {
         debug {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
-            storeFile file('../libs/ftc.debug.keystore')
+            storeFile file('../ftc_app/libs/ftc.debug.keystore')
             storePassword 'android'
         }
     }
@@ -51,7 +53,7 @@ android {
          * @see <a href="http://developer.android.com/tools/building/configuring-gradle.html">Configure Your Build</a>
          * @see <a href="http://developer.android.com/tools/publishing/versioning.html">Versioning Your App</a>
          */
-        def manifestFile = file('../FtcRobotController/src/main/AndroidManifest.xml');
+        def manifestFile = file('../ftc_app/FtcRobotController/src/main/AndroidManifest.xml');
         def manifestText = manifestFile.getText()
         //
         def vCodePattern = Pattern.compile("versionCode=\"(\\d+(\\.\\d+)*)\"")
@@ -91,13 +93,15 @@ android {
 
     sourceSets.main {
         jni.srcDirs = []
-        jniLibs.srcDir "../libs"
+        jniLibs.srcDir "../ftc_app/libs"
+        java.srcDir 'src/main/java'
+        java.exclude 'org/firstinspires/ftc/avalanche_desktop/**'
     }
 }
 
 repositories {
     flatDir {
-        dirs '../libs'
+        dirs '../ftc_app/libs'
     }
 }
 
