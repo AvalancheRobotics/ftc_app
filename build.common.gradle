@@ -1,3 +1,4 @@
+if ( rootProject.buildAndroid ) {
 /**
  * build.common.gradle
  *
@@ -97,6 +98,17 @@ android {
 repositories {
     flatDir {
         dirs '../libs'
+    }
+}
+
+// End of original contents.
+}
+else
+{
+    apply plugin: 'java'
+    sourceSets.main.java {
+        srcDir 'src/main/java'
+        exclude 'com/qualcomm/ftcrobotcontroller/**'
     }
 }
 
